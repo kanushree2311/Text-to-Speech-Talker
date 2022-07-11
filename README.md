@@ -7,6 +7,7 @@ The program can also read aloud the text file given the file path. It even askes
 until the user wants to exit. Although computer-generated speech is an incredibly complex branch of computer science, the pyttsx3 module provides an easy interface for it. 
 
 <br>
+
 ## Tech Stack used :
 Object Oriented Programming with Python
 pyttsx3 (python library)
