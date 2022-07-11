@@ -13,7 +13,7 @@ Object Oriented Programming with Python,
 pyttsx3 (python library)
 
 ## How the program works :
-Firstly, it askes if You want simple text converted to speech or read aloud a file. \n
+Firstly, it askes if You want simple text converted to speech or read aloud a file.
 Secondly, it askes which voice would you like the text to be narrated, in Female or Male voice.
 Thirdly, if you choose 'simple text' it will ask the message  to be converted to speech or if you choose 'file' it will ask for it's directory (location/path of the file).
 Fourthly, the message will be spoken by your operating system in your chosen voice.
