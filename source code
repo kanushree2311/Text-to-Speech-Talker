@@ -1,0 +1,91 @@
+import pyttsx3 as tts
+
+class TTS:
+    text="Hello, welcome to text to speech"
+    voice_choice=0
+    #constructor
+    def __init__(self,text):
+
+        self.text=text
+    
+    def __txt__(self): #will simply return the text
+
+        return self.text
+
+    #if user want to simply type a text and check the text to speech program
+    def simpletext(self):
+
+        self.text
+        self.__text_to_speech__()
+
+    #if user want to read a file, it's path can be used to read the file 
+    def filetospeech(self):
+        file=open(f"{self.text}",'r')
+        self.text=file.readlines()
+        self.__text_to_speech__()
+
+    #this method will convert the text to speech 
+    def __text_to_speech__(self):
+        speaker=tts.init()
+        voices = speaker.getProperty('voices')
+        
+        #voice id can be male(0) or female(1) 
+        if self.voice_choice==0:
+            speaker.setProperty('voice', voices[0].id)   
+        else:
+            speaker.setProperty('voice', voices[1].id) 
+            
+        speaker.say(self.text)
+        speaker.runAndWait()
+
+
+def voice_choice():
+    print("What voice would you like for the text:\n 1. Female \n 2. Male")
+    v_choice=input("Your choice: ")
+    if (v_choice.lower()=='female') or (v_choice=='1'):
+        print("-------------------------- You chose Female voice --------------------------")
+        TTS.voice_choice=1
+        return 1
+    else:
+        print("-------------------------- You chose Male voice --------------------------")
+        TTS.voice_choice=0
+        return 0
+
+def _continue():
+    
+    continuing=input("Do you want to continue ~ (Yes/No) ~ :")
+    if (continuing.lower()=="no"):
+        print("\n-------------------------- You have exited successfully --------------------------\n")
+        return False
+    elif (continuing.lower()=="yes"):
+        return True
+    else:
+        print("-------------------------- Wrong choice --------------------------")
+
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ WELCOME TO TEXT TO SPEECH TALKER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+text_try=True
+while text_try==True:   
+    print("What do you want to convert to speech: \n \n 1. Simple Text \n 2. File\n\n")
+
+    userchoice=input("Your choice: ")
+    
+    voice_choice()
+    
+    #user can type 'simple text' or 1 as their preferences 
+    if (userchoice.lower()=="simple text") or (userchoice=='1'):
+        usertext=input("Enter the text: \n")
+        convert=TTS(usertext)
+        convert.simpletext()
+    
+    #user can type 'file' or 2 as their preferences 
+    elif (userchoice.lower()=="file") or (userchoice=='2'):
+        userfile=input("Enter the text file path: \n")
+        convert=TTS(userfile)
+        convert.filetospeech()
+
+    else:
+        print("-------------------------- Wrong choice --------------------------")
+    
+    text_try=_continue()
+    
