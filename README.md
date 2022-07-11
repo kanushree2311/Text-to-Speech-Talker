@@ -1,5 +1,5 @@
 # FULL STACK DEVELOPMENT WITH PYTHON- TECHWAVE 
-Hi I made this project Text-To-Speech Talker during the 7 Days Free Bootcamp, conducted by <b> TechWave </b>.
+Hi I made this project during Full Stack development with Python Training program, conducted by <b> TechWave </b>.
 ## About the project
 This program demonstrates the use of the pyttsx3 third-party module. Any message you enter will be spoken out loud by your operating system's text-to-speech capabilities. 
 The program can also read aloud the text file given the file path. It even askes before hand which voice the user wants whether of a Female or a Male. The program continues 
