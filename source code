@@ -1,20 +1,19 @@
 import pyttsx3 as tts
+speaker=tts.init()
+assistant_voice = speaker.getProperty('voices')
 
 class TTS:
     text="Hello, welcome to text to speech"
     voice_choice=0
     #constructor
     def __init__(self,text):
-
         self.text=text
     
     def __txt__(self): #will simply return the text
-
         return self.text
 
     #if user want to simply type a text and check the text to speech program
     def simpletext(self):
-
         self.text
         self.__text_to_speech__()
 
@@ -26,7 +25,6 @@ class TTS:
 
     #this method will convert the text to speech 
     def __text_to_speech__(self):
-        speaker=tts.init()
         voices = speaker.getProperty('voices')
         
         #voice id can be male(0) or female(1) 
@@ -38,54 +36,78 @@ class TTS:
         speaker.say(self.text)
         speaker.runAndWait()
 
-
+#to change voice preferance in between
 def voice_choice():
-    print("What voice would you like for the text:\n 1. Female \n 2. Male")
+    print("Which voice would you prefer for the text:\n 1. Female \n 2. Male\n")
+    _assistant('Which voice would you prefer, 1 female or')
+    _assistant('2 male',0)
+
     v_choice=input("Your choice: ")
+
     if (v_choice.lower()=='female') or (v_choice=='1'):
-        print("-------------------------- You chose Female voice --------------------------")
+        print("-------------------------- You chose Female voice --------------------------\n")
+        _assistant('You chose Female voice')
         TTS.voice_choice=1
         return 1
     else:
-        print("-------------------------- You chose Male voice --------------------------")
+        print("-------------------------- You chose Male voice --------------------------\n")
+        _assistant('You chose Male voice',0)
         TTS.voice_choice=0
         return 0
 
+# to ask if the user want to still continue
 def _continue():
     
     continuing=input("Do you want to continue ~ (Yes/No) ~ :")
     if (continuing.lower()=="no"):
         print("\n-------------------------- You have exited successfully --------------------------\n")
+        _assistant('You have exited successfully, have a good day')
         return False
     elif (continuing.lower()=="yes"):
         return True
     else:
-        print("-------------------------- Wrong choice --------------------------")
+        print("\n-------------------------- Wrong choice --------------------------\n")
+        _assistant('oops!! wrong choice please fill the correct one',0)
+        _continue()
 
-print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ WELCOME TO TEXT TO SPEECH TALKER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+#assistant's voice messages
+def _assistant(tospeak,who=1):
+    #by default female voice as the assistant
+    
+    speaker.setProperty('voice', assistant_voice[who].id)
+    speaker.say(tospeak)
+    speaker.runAndWait()
+
+
+print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ WELCOME TO TEXT TO SPEECH TALKER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+_assistant('good wishes, welcome to text to speech talker')
 
 text_try=True
+
 while text_try==True:   
     print("What do you want to convert to speech: \n \n 1. Simple Text \n 2. File\n\n")
+    _assistant('What do you want to convert to speech, 1 simple text, 2 file')
 
     userchoice=input("Your choice: ")
     
     voice_choice()
     
-    #user can type 'simple text' or 1 as their preferences 
+    #user can type 'simple text' or 1 as they prefer
     if (userchoice.lower()=="simple text") or (userchoice=='1'):
         usertext=input("Enter the text: \n")
         convert=TTS(usertext)
         convert.simpletext()
     
-    #user can type 'file' or 2 as their preferences 
+    #user can type 'file' or 2 as they prefer
     elif (userchoice.lower()=="file") or (userchoice=='2'):
         userfile=input("Enter the text file path: \n")
         convert=TTS(userfile)
         convert.filetospeech()
 
     else:
-        print("-------------------------- Wrong choice --------------------------")
+        print("\n-------------------------- Wrong choice --------------------------\n")
+        _assistant('oops!! wrong choice please fill the correct one',0)
+        text_try=True
     
     text_try=_continue()
     
